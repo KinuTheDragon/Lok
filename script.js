@@ -154,9 +154,9 @@ function setUpPuzzleTableEventListeners() {
 }
 
 function selectCell(cell) {
-    if (!currentPath.length) saveState();
     if (currentPath.length && wildcards.length < currentPath.filter(x => puzzle[x].char === "?").length) return;
     let index = +cell.getAttribute("index");
+    if (!puzzle[index].black && !currentPath.length) saveState();
     if (isValidKeywordPath(currentPath)) {
         doKeywordEffect(index);
         return;
@@ -184,15 +184,17 @@ function doKeywordEffect(cell) {
             if (blackOutCell(cell)) endMove();
             break;
         case "TLAK":
-            if (effectCell === null) {
-                effectCell = cell;
-                getCellElement(cell).classList.add("selected");
-            } else if (!areAdjacent(effectCell, cell)) {
-                getCellElement(effectCell).classList.remove("selected");
-                effectCell = cell;
-                getCellElement(cell).classList.add("selected");
-            } else {
-                if (blackOutCell(cell, effectCell)) endMove();
+            if (!puzzle[cell].black) {
+                if (effectCell === null) {
+                    effectCell = cell;
+                    getCellElement(cell).classList.add("selected");
+                } else if (!areAdjacent(effectCell, cell)) {
+                    getCellElement(effectCell).classList.remove("selected");
+                    effectCell = cell;
+                    getCellElement(cell).classList.add("selected");
+                } else {
+                    if (blackOutCell(cell, effectCell)) endMove();
+                }
             }
             break;
         case "TA":
@@ -357,7 +359,7 @@ function copyLink() {
     navigator.clipboard.writeText(link);
 }
 
-if (location.href.indexOf("?")) {
+if (location.href.indexOf("?") > -1) {
     let base64 = location.href.split("?")[1].replaceAll("_", "/").replace("-", "+");
     while (base64.length % 4) base64 += "=";
     loadFromString(atob(base64));
