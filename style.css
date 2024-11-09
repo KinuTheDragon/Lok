@@ -1,0 +1,123 @@
+@font-face {
+    font-family: "NovaMono";
+    src: url("novamono.ttf");
+}
+
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: "NovaMono";
+    font-size: 1.5em;
+    line-height: 100%;
+}
+
+a {
+    color: #0ff;
+}
+
+a:hover, a:active {
+    color: #0f0;
+}
+
+.quote {
+    color: #000;
+    box-sizing: border-box;
+    --i:255,255,255;
+    --c:rgba(var(--i),1) , rgba(var(--i), 0);
+    --d:20px;
+    padding:var(--d);
+    background-image:
+        linear-gradient(rgba(var(--i), 1),rgba(var(--i), 1)),
+        radial-gradient(circle at bottom left, var(--c)  70%),
+        radial-gradient(circle at bottom right, var(--c) 70%),
+        radial-gradient(circle at top right, var(--c) 70%),
+        radial-gradient(circle at top left, var(--c) 70%),
+  
+        linear-gradient(to right, var(--c)),
+        linear-gradient(to left, var(--c)),
+        linear-gradient(to top, var(--c)),
+        linear-gradient(to bottom, var(--c));
+  
+    background-size:
+        calc(100% - 2*var(--d)) calc(100% - 2*var(--d)),
+   
+        var(--d) var(--d),var(--d) var(--d),var(--d) var(--d),var(--d) var(--d),
+   
+        var(--d) calc(100% - 2*var(--d)),var(--d) calc(100% - 2*var(--d)),calc(100% - 2*var(--d)) var(--d),calc(100% - 2*var(--d)) var(--d);
+    background-position:center,
+  
+        top right,top left,bottom left,bottom right,
+    
+        right center, left center,top center, bottom center;
+    background-repeat:no-repeat;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.cell {
+    background-color: #fff;
+    color: #000;
+    transition: all 0.1s ease-in;
+}
+
+#puzzle td, #letters td {
+    --size: 0.8em;
+    min-width: var(--size);
+    width: var(--size);
+    min-height: var(--size);
+    height: var(--size);
+    text-align: center;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-size: 1.5em;
+    padding: 0;
+}
+
+.cell.selected {
+    background-color: #888;
+}
+
+.cell.selected.current {
+    background-color: #ccc;
+}
+
+.cell.blacked {
+    background-color: #444;
+    color: #fff;
+}
+
+#word {
+    white-space: pre;
+    font-size: 1.5em;
+}
+
+#word.valid {
+    color: #0f0;
+}
+
+#word .x {
+    color: #888;
+    font-size: 0.75em;
+}
+
+#puzzle:has(td) {
+    --border-color: #fff;
+    border: 3px solid var(--border-color);
+    border-radius: 6px;
+}
+
+#puzzle.solved {
+    --border-color: #0f0;
+}
+
+.hidden {
+    display: none;
+}
+
+button:has(img) {
+    background-color: transparent;
+    border: none;
+}

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>LOK (Unofficial): Play</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <h1>LOK (Unofficial): Play</h1>
+    <a href="index.html">Back to home</a><br/>
+    <select id="puzzle-select">
+        <optgroup label="Chapter 1">
+            <option value="c1m">Chapter 1 Meta</option>
+            <option disabled>Puzzle 1</option>
+            <option value="2" selected>Puzzle 2</option>
+            <option value="3">Puzzle 3</option>
+            <option value="4">Puzzle 4</option>
+            <option value="5">Puzzle 5</option>
+            <option value="6">Puzzle 6</option>
+            <option value="7">Puzzle 7</option>
+            <option value="8">Puzzle 8</option>
+        </optgroup>
+        <optgroup label="Chapter 2">
+            <option value="c2m">Chapter 2 Meta</option>
+            <option value="9">Puzzle 9</option>
+            <option value="10">Puzzle 10</option>
+            <option value="11">Puzzle 11</option>
+            <option value="12">Puzzle 12</option>
+            <option value="13">Puzzle 13</option>
+            <option value="14">Puzzle 14</option>
+            <option value="15">Puzzle 15</option>
+            <option value="16">Puzzle 16 (*)</option>
+            <option value="17">Puzzle 17 (*)</option>
+        </optgroup>
+        <optgroup label="Chapter 3">
+            <option value="c3m">Chapter 3 Meta</option>
+            <option value="18">Puzzle 18</option>
+            <option value="19">Puzzle 19</option>
+            <option value="20">Puzzle 20</option>
+            <option value="21">Puzzle 21</option>
+            <option value="22-1">Puzzle 22.1 (unsolvable)</option>
+            <option value="22-2">Puzzle 22.2 (unsolvable)</option>
+            <option value="23">Puzzle 23</option>
+            <option value="24">Puzzle 24</option>
+            <option value="25">Puzzle 25</option>
+            <option value="26">Puzzle 26 (*)</option>
+            <option value="27">Puzzle 27 (*)</option>
+        </optgroup>
+        <optgroup label="Chapter 4">
+            <option value="c4m">Chapter 4 Meta</option>
+            <option value="28">Puzzle 28</option>
+            <option value="29">Puzzle 29</option>
+            <option value="30">Puzzle 30</option>
+            <option value="31-1">Puzzle 31.1 (unsolvable)</option>
+            <option value="31-2">Puzzle 31.2 (unsolvable)</option>
+            <option value="31-3">Puzzle 31.3 (unsolvable)</option>
+            <option value="32">Puzzle 32</option>
+            <option value="33">Puzzle 33</option>
+            <option value="34">Puzzle 34</option>
+            <option value="35">Puzzle 35</option>
+            <option value="36">Puzzle 36</option>
+            <option value="37">Puzzle 37 (*)</option>
+            <option value="38">Puzzle 38 (*)</option>
+        </optgroup>
+        <optgroup label="Chapter 5">
+            <option value="c5m">Chapter 5 Meta</option>
+            <option value="39">Puzzle 39</option>
+            <option value="40">Puzzle 40</option>
+            <option value="41">Puzzle 41 (unsolvable)</option>
+            <option value="42">Puzzle 42</option>
+            <option value="43">Puzzle 43</option>
+            <option value="44">Puzzle 44</option>
+            <option value="45">Puzzle 45</option>
+            <option value="46">Puzzle 46 (*)</option>
+            <option value="47">Puzzle 47 (*)</option>
+        </optgroup>
+        <optgroup label="Chapter 6">
+            <option value="c6m">Chapter 6 Meta</option>
+            <option value="48">Puzzle 48</option>
+            <option value="49">Puzzle 49</option>
+            <option value="50">Puzzle 50</option>
+            <option value="51">Puzzle 51</option>
+            <option value="52">Puzzle 52</option>
+            <option value="53">Puzzle 53</option>
+            <option value="54">Puzzle 54 (*)</option>
+            <option value="55">Puzzle 55 (*)</option>
+        </optgroup>
+        <optgroup label="Chapter 7">
+            <option value="c7m">Chapter 7 Meta</option>
+            <option value="56">Puzzle 56</option>
+            <option value="57">Puzzle 57</option>
+            <option value="58-1">Puzzle 58.1 (unsolvable)</option>
+            <option value="58-2">Puzzle 58.2 (unsolvable)</option>
+            <option value="58-3">Puzzle 58.3 (unsolvable)</option>
+            <option value="59">Puzzle 59</option>
+            <option value="60">Puzzle 60</option>
+            <option value="61">Puzzle 61</option>
+            <option value="62">Puzzle 62</option>
+            <option value="63">Puzzle 63</option>
+            <option value="64">Puzzle 64 (*)</option>
+            <option value="65">Puzzle 65 (*)</option>
+        </optgroup>
+        <optgroup label="Chapter 8">
+            <option value="c8m">Chapter 8 Meta</option>
+            <option value="66">Puzzle 66</option>
+            <option value="67">Puzzle 67</option>
+            <option value="68">Puzzle 68</option>
+            <option value="69">Puzzle 69</option>
+            <option value="70">Puzzle 70</option>
+            <option value="71">Puzzle 71</option>
+            <option value="72">Puzzle 72</option>
+            <option value="73">Puzzle 73</option>
+            <option value="74">Puzzle 74</option>
+            <option value="75">Puzzle 75 (unsolvable)</option>
+            <option value="76">Puzzle 76</option>
+            <option value="77">Puzzle 76</option>
+            <option value="78">Puzzle 78</option>
+            <option value="79">Puzzle 79</option>
+            <option value="80">Puzzle 80</option>
+        </optgroup>
+    </select>
+    <button onclick="loadPuzzleSelect()"><img src="download.svg" /></button>
+    <button onclick="changeSelection(-1)"><img src="arrow-left.svg" /></button>
+    <button onclick="changeSelection(1)"><img src="arrow-right.svg" /></button><br/>
+    <span id="word"> </span><br/>
+    <button onclick="undo()"><img src="undo.svg" /></button>
+    <button onclick="restart()"><img src="restart.svg" /></button>
+    <table id="puzzle"></table>
+    <table id="letters" class="hidden"></table>
+    Custom puzzle:
+    <button onclick="loadFromString(document.getElementById('custom').value)"><img src="download.svg" /></button>
+    <button onclick="copyLink()">Copy puzzle link</button><br/>
+    <textarea id="custom"></textarea><br/>
+    (# = blacked-out cell, . = black cell, space = empty)
+    <script src="puzzles.js"></script>
+    <script src="script.js"></script>
+</html>
