@@ -117,7 +117,7 @@
             <option value="80">Puzzle 80</option>
         </optgroup>
     </select>
-    <button onclick="loadPuzzleSelect()"><img src="download.svg" /></button>
+    <button onclick="loadPuzzleSelect()">Load puzzle</button>
     <button onclick="changeSelection(-1)"><img src="arrow-left.svg" /></button>
     <button onclick="changeSelection(1)"><img src="arrow-right.svg" /></button><br/>
     <span id="word"> </span><br/>
@@ -126,7 +126,7 @@
     <table id="puzzle"></table>
     <table id="letters" class="hidden"></table>
     Custom puzzle:
-    <button onclick="loadFromString(document.getElementById('custom').value)"><img src="download.svg" /></button>
+    <button onclick="loadFromString(document.getElementById('custom').value)">Load custom puzzle</button>
     <button onclick="copyLink()">Copy puzzle link</button><br/>
     <textarea id="custom"></textarea><br/>
     (# = blacked-out cell, . = black cell, space = empty)
