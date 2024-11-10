@@ -127,7 +127,7 @@ function updateGraphics() {
     letterMenu.classList.add("hidden");
     if (isValidKeywordPath(currentPath)) {
         wordElement.classList.add("valid");
-        if (["BE", "EB"].includes(getKeyword(currentPath).replaceAll("X", "")) && effectCell)
+        if (["BE", "EB"].includes(getKeyword(currentPath).replaceAll("X", "")) && effectCell !== null)
             letterMenu.classList.remove("hidden");
         if (["GRIVA", "AVIRG"].includes(getKeyword(currentPath).replaceAll("X", ""))) {
             puzzle.forEach((c, i) => blackOutCell(i));
@@ -235,7 +235,7 @@ function doKeywordEffect(cell) {
             break;
         case "BE":
             if (puzzle[cell].char === " ") {
-                if (effectCell)
+                if (effectCell !== null)
                     getCellElement(effectCell).classList.remove("selected");
                 effectCell = cell;
                 getCellElement(cell).classList.add("selected");
