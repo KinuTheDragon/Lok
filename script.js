@@ -142,16 +142,35 @@ function updateGraphics() {
 }
 
 let isMouseDown = false;
-document.addEventListener("mousedown", e => {
+function onMouseDown(e) {
+    if (typeof (window.ontouchstart) !== "undefined" && e.type === "mousedown") return;
     isMouseDown = true;
     if (e.target.classList.contains("cell")) selectCell(e.target);
-});
-document.addEventListener("mouseup", () => {isMouseDown = false;});
+}
+function onMouseUp(e) {
+    isMouseDown = false;
+}
+function onMouseMove(e) {
+    if (typeof (window.ontouchstart) !== "undefined" && e.type === "mousemove") return;
+    if (isMouseDown) selectCell(e.target);
+}
+document.addEventListener("mousedown", onMouseDown);
+document.addEventListener("touchstart", onMouseDown);
+document.addEventListener("mouseup", onMouseUp);
+document.addEventListener("touchend", onMouseUp);
 function setUpPuzzleTableEventListeners() {
     puzzleTable.querySelectorAll(".cell").forEach(cell => {
-        cell.addEventListener("mousemove", e => {if (isMouseDown) selectCell(e.target);})
+        cell.addEventListener("mousemove", onMouseMove);
     });
 }
+
+document.querySelectorAll("button").forEach(btn => {
+    let oldClick = btn.onclick;
+    btn.ontouchstart = btn.onclick = e => {
+        if (typeof (window.ontouchstart) !== "undefined" && e.type === "click") return;
+        oldClick(e);
+    }
+});
 
 function selectCell(cell) {
     if (currentPath.length && wildcards.length < currentPath.filter(x => puzzle[x].char === "?").length) return;
@@ -238,7 +257,8 @@ function doKeywordEffect(cell) {
 }
 
 letterMenu.querySelectorAll("td").forEach(letter => {
-    letter.addEventListener("mousedown", e => {
+    let listener = e => {
+        if (typeof (window.ontouchstart) !== "undefined" && e.type === "mousedown") return;
         if (["BE", "EB"].includes(getKeyword(currentPath).replaceAll("X", "")) && effectCell) {
             getCellElement(effectCell).innerText = puzzle[effectCell].char = e.target.getAttribute("letter");
             getCellElement(effectCell).classList.remove("selected");
@@ -260,7 +280,9 @@ letterMenu.querySelectorAll("td").forEach(letter => {
             }
             updateGraphics();
         }
-    });
+    };
+    letter.addEventListener("mousedown", listener);
+    letter.addEventListener("touchstart", listener);
 });
 
 function getKeyword(path) {
