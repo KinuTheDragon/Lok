@@ -259,7 +259,7 @@ function doKeywordEffect(cell) {
 letterMenu.querySelectorAll("td").forEach(letter => {
     let listener = e => {
         if (typeof (window.ontouchstart) !== "undefined" && e.type === "mousedown") return;
-        if (["BE", "EB"].includes(getKeyword(currentPath).replaceAll("X", "")) && effectCell) {
+        if (["BE", "EB"].includes(getKeyword(currentPath).replaceAll("X", "")) && effectCell !== null) {
             getCellElement(effectCell).innerText = puzzle[effectCell].char = e.target.getAttribute("letter");
             getCellElement(effectCell).classList.remove("selected");
             endMove();
