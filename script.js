@@ -187,12 +187,18 @@ function selectCell(cell) {
     if (puzzleTable.querySelector(".current")) puzzleTable.querySelector(".current").classList.remove("current");
     cell.classList.add("current");
     updateGraphics();
-    if (isValidKeywordPath(currentPath)) currentPath.forEach(c => {
-        let char = puzzle[c].char;
-        if (char === "?") char = wildcards[puzzle.filter(x => x.char === "?").indexOf(puzzle[c])];
-        if (char === "X") getCellElement(c).classList.remove("selected");
-        else blackOutCell(c);
-    });
+    if (isValidKeywordPath(currentPath)) {
+        let wildcardIndex = 0;
+        currentPath.forEach(c => {
+            let char = puzzle[c].char;
+            if (char === "?") {
+                char = wildcards[wildcardIndex];
+                wildcardIndex++;
+            }
+            if (char === "X") getCellElement(c).classList.remove("selected");
+            else blackOutCell(c);
+        });
+    }
 }
 
 function doKeywordEffect(cell) {
