@@ -307,21 +307,23 @@ function isValidPath(path) {
     if (path.some(x => puzzle[x].char === "")) return false;
     if (path.length <= 1) return true;
     let currentDirection = getDirectionBetween(path[0], path[1]);
+    let wildcardIndex = 0;
     for (let i = 0; i < path.length - 1; i++) {
         let from = path[i];
         let to = path[i + 1];
-        if (!isValidMovement(from, to, currentDirection)) return false;
+        if (!isValidMovement(from, to, currentDirection, wildcardIndex)) return false;
+        if (puzzle[from].char === "?") wildcardIndex++;
         currentDirection = getDirectionBetween(from, to);
     }
     return true;
 }
 
-function isValidMovement(from, to, currentDirection) {
+function isValidMovement(from, to, currentDirection, wildcardIndex) {
     if (!areAdjacent(from, to)) return false;
     let direction = getDirectionBetween(from, to);
     if (currentDirection.every((x, i) => x === -direction[i])) return false;
     if (puzzle[from].char !== "X" &&
-        !(puzzle[from].char === "?" && wildcards[puzzle.filter(x => x.char === "?").indexOf(puzzle[from])] === "X") &&
+        !(puzzle[from].char === "?" && wildcards[wildcardIndex] === "X") &&
         currentDirection.some((x, i) => x !== direction[i])) return false;
     return true;
 }
